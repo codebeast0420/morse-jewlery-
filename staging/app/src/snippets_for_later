@@ -1,0 +1,242 @@
+<script setup>
+import HelloWorld from './components/HelloWorld.vue'
+</script>
+
+<template>
+  <div>
+    <a href="https://vitejs.dev" target="_blank">
+      <img src="/vite.svg" class="logo" alt="Vite logo" />
+    </a>
+    <a href="https://vuejs.org/" target="_blank">
+      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
+    </a>
+  </div>
+  <HelloWorld msg="Vite + Vue" />
+</template>
+
+<style scoped>
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
+}
+</style>
+
+        <!--
+        <model-gltf
+          :controlsOptions="{
+            enablePan,
+            enableZoom,
+            enableRotate,
+          }"
+          :width="900"
+          :height="300"
+          :position="{ x: 0, y: 0, z: 0 }"
+          :cameraPosition="{ x: 1, y: 2, z: -3 }"
+          :cameraRotation="{ x: 3, y: 2, z: -1 }"
+          :scale="{ x: 0.5, y: 0.5, z: 0.5 }"
+          :rotation="rotation"
+          @load="rotateModel"
+          :src="'/static/src/ring_'+message.toUpperCase()+'.glb'"
+        />-->
+
+
+            <!--
+      <form method="post" action="/contact#newsletter-footer" id="newsletter-footer" accept-charset="UTF-8" class="contact-form">
+        <input type="hidden" name="form_type" value="customer" />
+        <input type="hidden" name="utf8" value="✓" />
+        <label for="Email-2bf2be2b-19c1-4d47-901c-4deba23c12f0" class="hidden-label">Enter your email</label>
+        <input type="hidden" name="contact[tags]" value="prospect,newsletter" />
+        <input type="hidden" name="contact[context]" value="footer" />
+        <div class="footer__newsletter">
+          <input type="email" value="" placeholder="Enter your email" name="contact[email]" id="Email-2bf2be2b-19c1-4d47-901c-4deba23c12f0" class="footer__newsletter-input" autocorrect="off" autocapitalize="off" />
+          <button type="submit" class="footer__newsletter-btn" name="commit" aria-label="Subscribe">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-email" viewBox="0 0 64 64"><path d="M63 52H1V12h62zM1 12l25.68 24h9.72L63 12M21.82 31.68L1.56 51.16m60.78.78L41.27 31.68"></path></svg>
+            <span class="footer__newsletter-btn-label">Subscribe</span>
+          </button>
+        </div>
+      </form>
+    -->
+
+    /*import { ModelGltf } from "vue-3d-model";*/
+    import { reactive } from "vue";
+    components: {
+      /*ModelGltf,*/
+    },
+    /*
+    rotation: reactive({
+      x: 0,
+      y: 0,
+      z: 0,
+    }),*/
+            <!--
+        <vue3dLoader :autoPlay="true" :cameraLookAt="{ x: 0, y: 0, z: 0 }" :cameraPosition="{ x: 0, y: 0, z: 0 }" :cameraRotation="{ x: Math.PI, y: -20, z: 20 }"  :height="300" :filePath="fileSource" :position="positions" :rotation="rotations" :backgroundColor="0xffffff"></vue3dLoader>
+        -->
+        <!--
+        <vue3dLoader
+          :height="300"
+          :showFps="false"
+          :filePath="fileSource"
+          :position="positions"
+          :rotation="rotations"
+          @load="onLoad"
+          :cameraPosition="{ x: 1, y: 0, z: 0 }"
+          :controlsOptions="{
+            enablePan,
+            enableZoom,
+            enableRotate,
+          }"
+          :backgroundColor="0xffffff"
+        ></vue3dLoader>-->
+
+            <!--
+    <div class="grid grid-cols-6 mt-4 sm:mt-4 lg:mt-6">
+      <div class="col-span-2"></div>
+      <div class="col-span-2 align-middle">
+        <label for="finishes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cbe-font-select-label text-center lg:text-left">Select Finish</label>
+        <select id="finishes" @change="updateFinish" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option v-for="option in obj.options">
+            {{ option.text }}
+          </option>
+        </select>
+      </div>
+      <div class="col-span-2"></div>
+    </div>
+  -->
+      <!--
+    <div class="grid grid-cols-6 mt-4">
+      <div></div>
+      <div class="col-span-4 relative rounded-xl overflow-auto">
+        <div class="col-span-4 shadow-sm overflow-hidden my-8">
+          <table class="w-full text-md text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="px-6 py-3 rounded-l-lg">Letter</th>
+                <th scope="col" class="px-6 py-3">Morse Code</th>
+                <th scope="col" class="px-6 py-3 rounded-r-lg">Price</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white dark:bg-slate-800">
+              <tr v-for="char in messageArray" class="bg-white dark:bg-gray-800">
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ char }}</td>
+                <td scope="row" class="px-6 py-4 font-bold tracking-wider text-gray-900 whitespace-nowrap dark:text-white">{{ morseDict[char.toLowerCase()] }}</td>
+                <td class="px-6 py-4">{{ "$ " + prices[char.toUpperCase()] }}</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="font-semibold text-gray-900 dark:text-white">
+                <th scope="row" class="px-6 py-3 text-base">Total</th>
+                <td class="px-6 py-3"></td>
+                <td class="px-6 py-3">$ {{ total() }}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  -->
+  rotations: [],
+  positions: [],
+  fileSource: [],
+  enableRotate: ref(true),
+  enablePan: ref(true),
+  enableZoom: ref(true),
+  cRotation: null,
+  onLoad() {
+    var thisComponent = this;
+    var rotation = ref();
+    rotation.value = {
+      x: -Math.PI / 2,
+      y: 0,
+      z: 0,
+    };
+    function rotate() {
+      requestAnimationFrame(rotate);
+      rotation.value.z += 10;
+      thisComponent.cRotation = rotation.value;
+      //positon.value.z += 0.01;
+    }
+    rotate();
+
+    /*var thisComponent = this;
+    setInterval(() => {
+      thisComponent.rotation.z += 0.01;
+    }, 10);*/
+  },
+  rotateModel() {
+    var thisComponent = this;
+    setInterval(() => {
+      thisComponent.rotation.y += 0.1;
+    }, 10);
+    /*
+    let rot = () => {
+      this.rotation.z += 10;
+    }
+    requestAnimationFrame(rot);
+    */
+  },
+  /*
+  this.fileSource.push("/static/src/ring_" + element.toUpperCase() + ".glb");
+  posx += 1;
+  posy += 0;
+  posz += -0.4;
+  position = { x: posx, y: posy, z: posz };
+  rotation = { x: 0, y: 90, z: 0 };
+  this.positions.push(position);
+  this.rotations.push(rotation);
+  */
+      <!--
+    <model-obj :cameraRotation="cameraRotation" :rotation="rotation" @load="onLoad" src="/static/src/ball.obj" />
+  -->
+    <!--
+    <model-collada :rotation="rotation" @load="onLoad" src="/static/src/elf.dae"/>
+    -->
+            <!--
+        <vue3dLoader
+          :rotation="rotation"
+          @load="onLoad()"
+          :height="height"
+          :width="width"
+          :filePath="`/static/src/obj/ring_0.obj`"
+          :mtlPath="`/static/src/obj/ring_0.mtl`"
+          :environment="{
+            path: '/static/src/obj/',
+            format: '.png',
+            files: ['nxx.png', 'ny.png', 'nz.png', 'nz.png', 'nz.png', 'nz.png'],
+          }"
+        />
+        -->
+            <!--
+    <div class="grid grid-cols-3 mt-6">
+      <div></div>
+      <div class="header__item header__logo col">
+        <a role="button" tabindex="0" href="https://codebyedge.co.uk" class="a a-link">
+          <img src="./logo.svg" alt="logo" srcset="" />
+        </a>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  -->
+            <!---
+            <div v-if="message" class="grid grid-cols-5">
+              <div></div>
+              <div class="col-span-3 align-middle text-center"></div>
+              <div></div>
+            </div>
+            <div class="flex justify-center mt-8 sm:mt-8 lg:mt-16">
+              <hr class="w-5/6 sm:w-1/2 lg:w-1/3" />
+            </div>
+          -->
+          <select id="finishes" @change="amantiUpdateFinish" class="cbe-select justify-center">
+            <option v-for="option in obj.options">
+              {{ option.text }}
+            </option>
+          </select>

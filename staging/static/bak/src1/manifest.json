@@ -1,0 +1,21 @@
+{
+  "src/logo.svg": {
+    "file": "/static/prod/logo-1d3803bd.svg",
+    "src": "src/logo.svg"
+  },
+  "src/main.css": {
+    "file": "main-96f98084.css",
+    "src": "src/main.css"
+  },
+  "src/main.js": {
+    "assets": [
+      "/static/prod/logo-1d3803bd.svg"
+    ],
+    "css": [
+      "main-96f98084.css"
+    ],
+    "file": "prod/mainjs-e8dd5f36.js",
+    "isEntry": true,
+    "src": "src/main.js"
+  }
+}

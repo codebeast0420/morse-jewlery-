@@ -1,0 +1,26 @@
+{
+  "src/logo.svg": {
+    "file": "logo-1d3803bd.svg",
+    "src": "src/logo.svg"
+  },
+  "src/main.css": {
+    "file": "main-a0933a2d.css",
+    "src": "src/main.css"
+  },
+  "src/main.js": {
+    "assets": [
+      "logo-1d3803bd.svg",
+      "optima-35e5a52c.woff"
+    ],
+    "css": [
+      "main-a0933a2d.css"
+    ],
+    "file": "mainjs-ccfaf44b.js",
+    "isEntry": true,
+    "src": "src/main.js"
+  },
+  "src/optima.woff": {
+    "file": "optima-35e5a52c.woff",
+    "src": "src/optima.woff"
+  }
+}
