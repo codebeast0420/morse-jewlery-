@@ -29,6 +29,10 @@ class Archive extends React.PureComponent {
     console.log("redux products in Archive", props.products);
     console.log("redux config in Archive", props.configuration);
     console.log("redux preMadeProduct in Archive", props.preMadeProduct);
+    props.dispatchSetConfiguration({
+      ...props.configuration,
+      message: ""
+    })
   }
 
   componentDidMount() {
