@@ -264,30 +264,6 @@ class Single extends React.Component {
         );
       }
 
-      // if (
-      //   configuration.pa_stone[0].id === "at_your_choice" ||
-      //   configuration.pa_stone[0].id === "themes"
-      // ) {
-      //   console.log('here');
-      //   const items = [];
-      //   _.each(this.state.stoneColorMessage, (stoneColorMessageItem) => {
-      //     _.each(stoneColorMessageItem.lCodeArray, (lCode) => {
-      //       items.push(lCode.item);
-      //     });
-      //   });
-      //   if (configuration.pa_stone.id === "at_your_choice") {
-      //     this.handleMorseCharColorChange(
-      //       configuration.pa_stone.choice[configuration.pa_stone.slide].value
-      //         .color,
-      //       items[configuration.pa_stone.slide]
-      //     );
-      //   }
-      //   if (configuration.pa_stone.id === "themes") {
-      //     _.each(configuration.pa_stone.choice, (item, index) => {
-      //       this.handleMorseCharColorChange(item.value.color, items[index]);
-      //     });
-      //   }
-      // }
     }
     if (
       prevProps.configuration.message === this.props.configuration.message &&
@@ -364,7 +340,11 @@ class Single extends React.Component {
 
         //   console.log('text', text);
         // }
-        text = e.target.value[0] || "";
+        if (product.data.id == 402 || product.data.id == 405) {
+          console.log('405');
+          text = e.target.value[0] || "";
+        }
+        else { text = e.target.value; }
         this.setState({ msg: text });
         for (let i = 0; i < 26; i++) {
           // C5R
@@ -415,6 +395,7 @@ class Single extends React.Component {
         price: this.newPrice,
       });
       if (product.data.id == 402) this.create_BRACELET(text);
+      if (product.data.id == 405) this.create_PENDANT(text);
       // if(product.data.id == 186) 
     }
     this.chainElementSize = this.chainElementUnitsSize;
@@ -1846,7 +1827,7 @@ class Single extends React.Component {
           <div className="single" style={{ height }}>
             <div className="single__threejs">
               {/* {load && ( */}
-              {/* <JewerlyRingsRenderer
+              <JewerlyRingsRenderer
                 ringsUrls={ringsUrls}
                 stoneColor={stoneColor}
                 ringColor={ringColor}
@@ -1854,7 +1835,7 @@ class Single extends React.Component {
                 onLoad={this.handleOnRingOnLoad}
                 onReadyToUse={this.handleOnReadyToUse}
                 onInteraction={this.handleOnInteraction}
-              /> */}
+              />
             </div>
             <SettingMenu
               load={load}
@@ -1885,7 +1866,7 @@ class Single extends React.Component {
                   }}
                 />
               </div>
-              {/* <JewerlyRingsRenderer
+              <JewerlyRingsRenderer
                 ringsUrls={ringsUrls}
                 stoneColor={stoneColor}
                 ringColor={ringColor}
@@ -1898,7 +1879,7 @@ class Single extends React.Component {
                 onLoad={this.handleOnRingOnLoad}
                 onProgress={this.handleOnRingOnProgress}
                 onInteraction={this.handleOnInteraction}
-              /> */}
+              />
             </div>
 
             <SettingMenu

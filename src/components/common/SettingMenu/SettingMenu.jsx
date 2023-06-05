@@ -11,10 +11,10 @@ const SettingMenu = (props) => {
   const [tabId, setTabId] = useState("message");
   const [activeMetal, setActiveMetal] = useState("");
   const [activeSize, setActiveSize] = useState("");
-	const [activeTheme, setActiveTheme] = useState("");
+  const [activeTheme, setActiveTheme] = useState("");
   const [metals, setMetals] = useState([]);
   const [sizes, setSizes] = useState([]);
-	const [themeCols, setThemeCols] = useState([]);
+  const [themeCols, setThemeCols] = useState([]);
   const themes = useSelector((store) => store.themes);
   const configuration = useSelector((store) => store.configuration);
   const preMadeProduct = useSelector((store) => store.preMadeProduct);
@@ -40,8 +40,8 @@ const SettingMenu = (props) => {
   );
   useEffect(() => {
     console.log("product attribute in setting", props.product.attributes);
-		console.log('themes', themes); 
-		setThemeCols(themes.data);
+    console.log("themes", themes);
+    setThemeCols(themes.data);
     setMetals(
       props.product.attributes.filter((attr) => attr.name == "Material")[0]
         .options
@@ -73,22 +73,27 @@ const SettingMenu = (props) => {
     );
   };
 
-	const changeTheme = (theme) => {
-		setActiveTheme(theme.name);
-		const colorSubMenu = Menus.getColorsSubMenu().filter((menu) => menu.id === 'themes');
-		console.log('colorsubme', colorSubMenu);
-		console.log('choice', Menus.lettersChoices(configuration.message, theme.stones, true));
-		console.log('selected_theme', theme.slug);
-		const newConf = {
-			...configuration,
-			pa_stone: {
-				...colorSubMenu[0],
-				choice: Menus.lettersChoices(configuration.message, theme.stones, true),
-				selected_theme: theme.slug,
-			},
-		};
-		dispatch(setProductConfigurationAction(newConf));
-	}
+  const changeTheme = (theme) => {
+    setActiveTheme(theme.name);
+    const colorSubMenu = Menus.getColorsSubMenu().filter(
+      (menu) => menu.id === "themes"
+    );
+    console.log("colorsubme", colorSubMenu);
+    console.log(
+      "choice",
+      Menus.lettersChoices(configuration.message, theme.stones, true)
+    );
+    console.log("selected_theme", theme.slug);
+    const newConf = {
+      ...configuration,
+      pa_stone: {
+        ...colorSubMenu[0],
+        choice: Menus.lettersChoices(configuration.message, theme.stones, true),
+        selected_theme: theme.slug,
+      },
+    };
+    dispatch(setProductConfigurationAction(newConf));
+  };
 
   return (
     <div className="basis-5/12 flex pr-1 py-4 justify-content">
@@ -128,22 +133,24 @@ const SettingMenu = (props) => {
               </div>
             </button>
           </div>
-          <div className="basis-4/12 pr-1">
-            <button
-              className={`${
-                tabId == "theme"
-                  ? "bg-[#d4e4e4]"
-                  : "bg-gray-100 hover:bg-gray-200"
-              } text-[#305253] cbe-btn-text-font py-6 w-full rounded-none setting-menu-tab`}
-              onClick={() => setTabId("theme")}
-            >
-              <div className="flex flex-row content-center justify-center gap-x-2">
-                <div className="basis-3/4">
-                  <p className="font-bold">Colors</p>
+          {props.product.id !== 185 && props.product.id !== 186 && (
+                <div className="basis-4/12 pr-1">
+                  <button
+                    className={`${
+                      tabId == "theme"
+                        ? "bg-[#d4e4e4]"
+                        : "bg-gray-100 hover:bg-gray-200"
+                    } text-[#305253] cbe-btn-text-font py-6 w-full rounded-none setting-menu-tab`}
+                    onClick={() => setTabId("theme")}
+                  >
+                    <div className="flex flex-row content-center justify-center gap-x-2">
+                      <div className="basis-3/4">
+                        <p className="font-bold">Colors</p>
+                      </div>
+                    </div>
+                  </button>
                 </div>
-              </div>
-            </button>
-          </div>
+              )}
           <div className="basis-4/12">
             <button
               className={`${
