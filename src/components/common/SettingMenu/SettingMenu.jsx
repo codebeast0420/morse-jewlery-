@@ -82,7 +82,7 @@ const SettingMenu = (props) => {
 		const newConf = {
 			...configuration,
 			pa_stone: {
-				...colorSubMenu,
+				...colorSubMenu[0],
 				choice: Menus.lettersChoices(configuration.message, theme.stones, true),
 				selected_theme: theme.slug,
 			},

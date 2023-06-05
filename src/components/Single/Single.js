@@ -256,16 +256,11 @@ class Single extends React.Component {
       product.data.id !== 2096 &&
       product.data.id !== 2124
     ) {
-      let _paStone = configuration.pa_stone;
-      console.log('_paStone 1', configuration.pa_stone);
-      if (configuration.pa_stone[0] != null) {
-        _paStone = configuration.pa_stone[0];
-      }
       console.log('test', configuration);
-      if (_paStone === "solid_color") {
+      if (configuration.pa_stone === "solid_color") {
         console.log('one');
         this.handleOverrideAllMorseCharColors(
-          _paStone.choice[0].value.color
+          configuration.pa_stone.choice[0].value.color
         );
       }
 
@@ -301,15 +296,10 @@ class Single extends React.Component {
       product.data.id !== 2096 &&
       product.data.id !== 2124
     ) {
-      let _paStone = configuration.pa_stone;
-      console.log('_paStone', configuration.pa_stone);
-      if (configuration.pa_stone[0] != null) {
-        _paStone = configuration.pa_stone[0];
-      }
 
       if (
-        _paStone.id === "at_your_choice" ||
-        _paStone.id === "themes"
+        configuration.pa_stone.id === "at_your_choice" ||
+        configuration.pa_stone.id === "themes"
       ) {
         console.log('here');
         const items = [];
@@ -318,14 +308,14 @@ class Single extends React.Component {
             items.push(lCode.item);
           });
         });
-        if (_paStone.id === "at_your_choice") {
+        if (configuration.pa_stone.id === "at_your_choice") {
           this.handleMorseCharColorChange(
             configuration.pa_stone.choice[configuration.pa_stone.slide].value
               .color,
             items[configuration.pa_stone.slide]
           );
         }
-        if (_paStone.id === "themes") {
+        if (configuration.pa_stone.id === "themes") {
           _.each(configuration.pa_stone.choice, (item, index) => {
             this.handleMorseCharColorChange(item.value.color, items[index]);
           });
@@ -1856,7 +1846,7 @@ class Single extends React.Component {
           <div className="single" style={{ height }}>
             <div className="single__threejs">
               {/* {load && ( */}
-              <JewerlyRingsRenderer
+              {/* <JewerlyRingsRenderer
                 ringsUrls={ringsUrls}
                 stoneColor={stoneColor}
                 ringColor={ringColor}
@@ -1864,7 +1854,7 @@ class Single extends React.Component {
                 onLoad={this.handleOnRingOnLoad}
                 onReadyToUse={this.handleOnReadyToUse}
                 onInteraction={this.handleOnInteraction}
-              />
+              /> */}
             </div>
             <SettingMenu
               load={load}
@@ -1895,7 +1885,7 @@ class Single extends React.Component {
                   }}
                 />
               </div>
-              <JewerlyRingsRenderer
+              {/* <JewerlyRingsRenderer
                 ringsUrls={ringsUrls}
                 stoneColor={stoneColor}
                 ringColor={ringColor}
@@ -1908,7 +1898,7 @@ class Single extends React.Component {
                 onLoad={this.handleOnRingOnLoad}
                 onProgress={this.handleOnRingOnProgress}
                 onInteraction={this.handleOnInteraction}
-              />
+              /> */}
             </div>
 
             <SettingMenu
