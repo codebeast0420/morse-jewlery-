@@ -14,6 +14,8 @@ const SettingMenu = (props) => {
   const [activeTheme, setActiveTheme] = useState("");
   const [metals, setMetals] = useState([]);
   const [sizes, setSizes] = useState([]);
+  const [styles, setStyles] = useState([]);
+  const [activeStyle, setActiveStyle] = useState("");
   const [themeCols, setThemeCols] = useState([]);
   const themes = useSelector((store) => store.themes);
   const configuration = useSelector((store) => store.configuration);
@@ -46,20 +48,23 @@ const SettingMenu = (props) => {
       props.product.attributes.filter((attr) => attr.name == "Material")[0]
         .options
     );
-    setSizes(
-      props.product.attributes.filter((attr) => attr.name == "Size")[0].options
-    );
-    console.log(
-      "result",
-      props.product.attributes.filter((attr) => attr.name == "Material")[0]
-    );
+    if (props.product.id !== 408) {
+      setSizes(
+        props.product.attributes.filter((attr) => attr.name == "Size")[0]
+          .options
+      );
+    }
+    if (props.product.id == 408) {
+      setStyles(
+        props.product.attributes.filter(
+          (attr) => attr.name == "Hook Type (earrings)"
+        )[0].options
+      );
+    }
   }, []);
 
   const changeMetal = (metal) => {
     setActiveMetal(metal.name);
-    console.log("configuration", configuration);
-    console.log("confi meta", configuration[metal.id]);
-    console.log("metal", metal);
     dispatch(
       setProductConfigurationAction({
         ...configuration,
@@ -73,17 +78,25 @@ const SettingMenu = (props) => {
     );
   };
 
+  const changeStyle = (style) => {
+    setActiveStyle(style.name);
+    dispatch(
+      setProductConfigurationAction({
+        ...configuration,
+        pa_hook_type_earrings: {
+          color: null,
+          id: style.id,
+          name: style.name,
+          selected: true,
+        },
+      })
+    );
+  };
   const changeTheme = (theme) => {
     setActiveTheme(theme.name);
     const colorSubMenu = Menus.getColorsSubMenu().filter(
       (menu) => menu.id === "themes"
     );
-    console.log("colorsubme", colorSubMenu);
-    console.log(
-      "choice",
-      Menus.lettersChoices(configuration.message, theme.stones, true)
-    );
-    console.log("selected_theme", theme.slug);
     const newConf = {
       ...configuration,
       pa_stone: {
@@ -134,40 +147,61 @@ const SettingMenu = (props) => {
             </button>
           </div>
           {props.product.id !== 185 && props.product.id !== 186 && (
-                <div className="basis-4/12 pr-1">
-                  <button
-                    className={`${
-                      tabId == "theme"
-                        ? "bg-[#d4e4e4]"
-                        : "bg-gray-100 hover:bg-gray-200"
-                    } text-[#305253] cbe-btn-text-font py-6 w-full rounded-none setting-menu-tab`}
-                    onClick={() => setTabId("theme")}
-                  >
-                    <div className="flex flex-row content-center justify-center gap-x-2">
-                      <div className="basis-3/4">
-                        <p className="font-bold">Colors</p>
-                      </div>
-                    </div>
-                  </button>
+            <div className="basis-4/12 pr-1">
+              <button
+                className={`${
+                  tabId == "theme"
+                    ? "bg-[#d4e4e4]"
+                    : "bg-gray-100 hover:bg-gray-200"
+                } text-[#305253] cbe-btn-text-font py-6 w-full rounded-none setting-menu-tab`}
+                onClick={() => setTabId("theme")}
+              >
+                <div className="flex flex-row content-center justify-center gap-x-2">
+                  <div className="basis-3/4">
+                    <p className="font-bold">Colors</p>
+                  </div>
                 </div>
-              )}
-          <div className="basis-4/12">
-            <button
-              className={`${
-                tabId == "size"
-                  ? "bg-[#d4e4e4]"
-                  : "bg-gray-100 hover:bg-gray-200"
-              } bg-[#d4e4e4] text-[#305253] cbe-btn-text-font py-[1rem] w-full rounded-none setting-menu-tab`}
-              onClick={() => setTabId("size")}
-            >
-              <div className="flex flex-row content-center justify-center gap-x-2">
-                <div className="basis-3/4 flex flex-col">
-                  <p className="italic text-xs">Select</p>
-                  <p className="font-bold">Size</p>
+              </button>
+            </div>
+          )}
+          {props.product.id !== 408 && (
+            <div className="basis-4/12">
+              <button
+                className={`${
+                  tabId == "size"
+                    ? "bg-[#d4e4e4]"
+                    : "bg-gray-100 hover:bg-gray-200"
+                } bg-[#d4e4e4] text-[#305253] cbe-btn-text-font py-[1rem] w-full rounded-none setting-menu-tab`}
+                onClick={() => setTabId("size")}
+              >
+                <div className="flex flex-row content-center justify-center gap-x-2">
+                  <div className="basis-3/4 flex flex-col">
+                    <p className="italic text-xs">Select</p>
+                    <p className="font-bold">Size</p>
+                  </div>
                 </div>
-              </div>
-            </button>
-          </div>
+              </button>
+            </div>
+          )}
+          {props.product.id == 408 && (
+            <div className="basis-4/12">
+              <button
+                className={`${
+                  tabId == "style"
+                    ? "bg-[#d4e4e4]"
+                    : "bg-gray-100 hover:bg-gray-200"
+                } bg-[#d4e4e4] text-[#305253] cbe-btn-text-font py-[1rem] w-full rounded-none setting-menu-tab`}
+                onClick={() => setTabId("style")}
+              >
+                <div className="flex flex-row content-center justify-center gap-x-2">
+                  <div className="basis-3/4 flex flex-col">
+                    <p className="italic text-xs">Select</p>
+                    <p className="font-bold">Style</p>
+                  </div>
+                </div>
+              </button>
+            </div>
+          )}
         </div>
         {tabId == "message" && (
           <div className="flex flex-row mt-4 justify-content">
@@ -314,6 +348,24 @@ const SettingMenu = (props) => {
               >
                 hello@codebyedge.com
               </a>
+            </div>
+          </div>
+        )}
+        {tabId == "style" && (
+          <div className="flex flex-col basis-12/12 w-full justify-center">
+            <div className="flex flex-row mb-1 justify-start">
+              {styles.map((style) => (
+                <button
+                  className={`${
+                    activeStyle == style.name
+                      ? "cbe-bg-green-lightest"
+                      : "bg-gray-100 hover:bg-gray-200"
+                  } bg-gray-100 cbe-btn-text-green cbe-bnt-text-font py-6 w-full rounded-none setting-menu-tab mt-2`}
+                  onClick={() => changeStyle(style)}
+                >
+                  {style.name}
+                </button>
+              ))}
             </div>
           </div>
         )}
