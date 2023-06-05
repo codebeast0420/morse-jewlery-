@@ -185,6 +185,7 @@ class Single extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('uipd');
     const { configuration, product } = this.props;
     if (prevProps.configuration.message !== configuration.message) {
       if (product.data.id === 186 || product.data.id === 185) {
@@ -255,11 +256,43 @@ class Single extends React.Component {
       product.data.id !== 2096 &&
       product.data.id !== 2124
     ) {
-      if (configuration.pa_stone.id === "solid_color") {
+      let _paStone = configuration.pa_stone;
+      console.log('_paStone 1', configuration.pa_stone);
+      if (configuration.pa_stone[0] != null) {
+        _paStone = configuration.pa_stone[0];
+      }
+      console.log('test', configuration);
+      if (_paStone === "solid_color") {
+        console.log('one');
         this.handleOverrideAllMorseCharColors(
-          configuration.pa_stone.choice[0].value.color
+          _paStone.choice[0].value.color
         );
       }
+
+      // if (
+      //   configuration.pa_stone[0].id === "at_your_choice" ||
+      //   configuration.pa_stone[0].id === "themes"
+      // ) {
+      //   console.log('here');
+      //   const items = [];
+      //   _.each(this.state.stoneColorMessage, (stoneColorMessageItem) => {
+      //     _.each(stoneColorMessageItem.lCodeArray, (lCode) => {
+      //       items.push(lCode.item);
+      //     });
+      //   });
+      //   if (configuration.pa_stone.id === "at_your_choice") {
+      //     this.handleMorseCharColorChange(
+      //       configuration.pa_stone.choice[configuration.pa_stone.slide].value
+      //         .color,
+      //       items[configuration.pa_stone.slide]
+      //     );
+      //   }
+      //   if (configuration.pa_stone.id === "themes") {
+      //     _.each(configuration.pa_stone.choice, (item, index) => {
+      //       this.handleMorseCharColorChange(item.value.color, items[index]);
+      //     });
+      //   }
+      // }
     }
     if (
       prevProps.configuration.message === this.props.configuration.message &&
@@ -268,24 +301,31 @@ class Single extends React.Component {
       product.data.id !== 2096 &&
       product.data.id !== 2124
     ) {
+      let _paStone = configuration.pa_stone;
+      console.log('_paStone', configuration.pa_stone);
+      if (configuration.pa_stone[0] != null) {
+        _paStone = configuration.pa_stone[0];
+      }
+
       if (
-        configuration.pa_stone.id === "at_your_choice" ||
-        configuration.pa_stone.id === "themes"
+        _paStone.id === "at_your_choice" ||
+        _paStone.id === "themes"
       ) {
+        console.log('here');
         const items = [];
         _.each(this.state.stoneColorMessage, (stoneColorMessageItem) => {
           _.each(stoneColorMessageItem.lCodeArray, (lCode) => {
             items.push(lCode.item);
           });
         });
-        if (configuration.pa_stone.id === "at_your_choice") {
+        if (_paStone.id === "at_your_choice") {
           this.handleMorseCharColorChange(
             configuration.pa_stone.choice[configuration.pa_stone.slide].value
               .color,
             items[configuration.pa_stone.slide]
           );
         }
-        if (configuration.pa_stone.id === "themes") {
+        if (_paStone.id === "themes") {
           _.each(configuration.pa_stone.choice, (item, index) => {
             this.handleMorseCharColorChange(item.value.color, items[index]);
           });
@@ -331,7 +371,7 @@ class Single extends React.Component {
         // if (e.target.value.length > 1) {
         //   text = e.target.value.substring(0, e.target.value.length - 1);
         //   this.setState({ msg: text });
-          
+
         //   console.log('text', text);
         // }
         text = e.target.value[0] || "";
@@ -1855,7 +1895,6 @@ class Single extends React.Component {
                   }}
                 />
               </div>
-              {/* {load && ( */}
               <JewerlyRingsRenderer
                 ringsUrls={ringsUrls}
                 stoneColor={stoneColor}
@@ -1871,12 +1910,7 @@ class Single extends React.Component {
                 onInteraction={this.handleOnInteraction}
               />
             </div>
-            {/* <SingleMenu
-            finishAnime={() => this.setState({ load: true })}
-            showLoading={showLoading}
-            product={product.data}
-          />
-          {this.modals()} */}
+
             <SettingMenu
               load={load}
               Loading={Loading}
@@ -1970,7 +2004,6 @@ class Single extends React.Component {
               />
             </div>
 
-            {/* {load && ( */}
             <JewerlyRingsRenderer
               ringsUrls={ringsUrls}
               stoneColor={stoneColor}
@@ -1984,9 +2017,7 @@ class Single extends React.Component {
               onInteraction={this.handleOnInteraction}
             />
 
-            {/* )} */}
           </div>
-          {/* <button onClick={() => console.log(ringsUrls, stoneColor, ringColor, createChainType, chainElementsNames, chainLength)}>asdf</button> */}
           <SettingMenu
             load={load}
             Loading={Loading}
@@ -1995,11 +2026,6 @@ class Single extends React.Component {
             onChangeMsg={this.onChangeMsg}
             product={product.data}
           />
-          {/* <SingleMenu
-            finishAnime={() => this.setState({ load: true })}
-            showLoading={showLoading}
-            product={product.data}
-          /> */}
         </div >
       </div>
     );

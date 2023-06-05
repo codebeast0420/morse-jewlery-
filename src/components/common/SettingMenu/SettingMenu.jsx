@@ -11,8 +11,10 @@ const SettingMenu = (props) => {
   const [tabId, setTabId] = useState("message");
   const [activeMetal, setActiveMetal] = useState("");
   const [activeSize, setActiveSize] = useState("");
+	const [activeTheme, setActiveTheme] = useState("");
   const [metals, setMetals] = useState([]);
   const [sizes, setSizes] = useState([]);
+	const [themeCols, setThemeCols] = useState([]);
   const themes = useSelector((store) => store.themes);
   const configuration = useSelector((store) => store.configuration);
   const preMadeProduct = useSelector((store) => store.preMadeProduct);
@@ -38,6 +40,8 @@ const SettingMenu = (props) => {
   );
   useEffect(() => {
     console.log("product attribute in setting", props.product.attributes);
+		console.log('themes', themes); 
+		setThemeCols(themes.data);
     setMetals(
       props.product.attributes.filter((attr) => attr.name == "Material")[0]
         .options
@@ -51,23 +55,39 @@ const SettingMenu = (props) => {
     );
   }, []);
 
-	const changeMetal = (metal) => {
-		setActiveMetal(metal.name);
-		console.log('configuration', configuration);
-		console.log('confi meta', configuration[metal.id]);
-		console.log('metal', metal);
-		dispatch(setProductConfigurationAction({
+  const changeMetal = (metal) => {
+    setActiveMetal(metal.name);
+    console.log("configuration", configuration);
+    console.log("confi meta", configuration[metal.id]);
+    console.log("metal", metal);
+    dispatch(
+      setProductConfigurationAction({
+        ...configuration,
+        pa_material: {
+          color: metal.color,
+          id: metal.id,
+          name: metal.name,
+          selected: true,
+        },
+      })
+    );
+  };
+
+	const changeTheme = (theme) => {
+		setActiveTheme(theme.name);
+		const colorSubMenu = Menus.getColorsSubMenu().filter((menu) => menu.id === 'themes');
+		console.log('colorsubme', colorSubMenu);
+		console.log('choice', Menus.lettersChoices(configuration.message, theme.stones, true));
+		console.log('selected_theme', theme.slug);
+		const newConf = {
 			...configuration,
-			pa_material: {
-				color: metal.color,
-				id: metal.id,
-				name: metal.name,
-				selected: true
+			pa_stone: {
+				...colorSubMenu,
+				choice: Menus.lettersChoices(configuration.message, theme.stones, true),
+				selected_theme: theme.slug,
 			},
-		}))
-		// if (configuration[metal.id].id !== metal.id) {
-		// 	dispatch(setSavedAction(false));
-		// }
+		};
+		dispatch(setProductConfigurationAction(newConf));
 	}
 
   return (
@@ -104,6 +124,22 @@ const SettingMenu = (props) => {
                 <div className="basis-3/4 flex flex-col">
                   <p className="italic text-xs">Select</p>
                   <p className="font-bold">Metal</p>
+                </div>
+              </div>
+            </button>
+          </div>
+          <div className="basis-4/12 pr-1">
+            <button
+              className={`${
+                tabId == "theme"
+                  ? "bg-[#d4e4e4]"
+                  : "bg-gray-100 hover:bg-gray-200"
+              } text-[#305253] cbe-btn-text-font py-6 w-full rounded-none setting-menu-tab`}
+              onClick={() => setTabId("theme")}
+            >
+              <div className="flex flex-row content-center justify-center gap-x-2">
+                <div className="basis-3/4">
+                  <p className="font-bold">Colors</p>
                 </div>
               </div>
             </button>
@@ -211,6 +247,29 @@ const SettingMenu = (props) => {
                 Our precious metals and gemstones are all sourced in accordance
                 with the Responsible Jewellery Council Code of Conduct
               </p>
+            </div>
+          </div>
+        )}
+        {tabId == "theme" && (
+          <div className="flex flex-col basis-12/12 w-full justify-center">
+            <div className="mb-1">
+              {themeCols.map((theme) => (
+                <button
+                  className={`${
+                    theme.name == activeTheme
+                      ? "cbe-bg-green-lightest"
+                      : "bg-gray-100 hover:bg-gray-200"
+                  } py-6  rounded-none w-full py-8 px-10 rounded-lg justify-self-end setting-menu-tab mt-2`}
+                  onClick={() => changeTheme(theme)}
+                >
+                  <div className="flex justify-between px-8 justify-between">
+                    <p className="cbe-btn-text-font text-sm font-medium">
+                      {theme.name}
+                    </p>
+                    <p className="text-sm text-gray-500"></p>
+                  </div>
+                </button>
+              ))}
             </div>
           </div>
         )}
